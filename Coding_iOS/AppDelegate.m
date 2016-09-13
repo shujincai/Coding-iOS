@@ -52,6 +52,11 @@
         [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound)];
     }else{
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= _IPHONE80_
+        /**
+         IOS8 推出的本地推送
+         
+         - returns:
+         */
         UIMutableUserNotificationCategory *categorys = [[UIMutableUserNotificationCategory alloc] init];
         UIUserNotificationSettings *userSettings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeBadge|UIUserNotificationTypeSound|UIUserNotificationTypeAlert
                                                                                      categories:[NSSet setWithObject:categorys]];
@@ -79,8 +84,11 @@
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
     
-    //网络
+    // 这个类主要是用来设置状态栏处的网络标示，用法在程序启动那块调用以下方法就会自动show和hide网络标示了
     [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
+    /**
+     *  监听网络状态
+     */
     [[AFNetworkReachabilityManager sharedManager] startMonitoring];
     
     //sd加载的数据类型
